@@ -39,25 +39,28 @@ var stringifyJSON = function(obj) {
   }
   if (typeof obj === 'object' && Object.keys(obj).length !== 0) {
     var newStr = ["{"];
-    for (var i = 0; i < Object.keys(obj).length; i++) {
-      if (typeof obj[i] === 'boolean') {
-        newStr.push(obj);
+    var oKobj = Object.keys(obj);
+    for (var i = 0; i < oKobj.length; i++) {
+      if (typeof oKobj[i] === 'boolean') {
+        newStr.push(oKobj[i]);
       }
-      if (typeof obj[i] === 'number' || typeof obj[i] === 'string') {
+      if (typeof oKobj[i] === 'number' || typeof oKobj[i] === 'string') {
         newStr.push('\"');
-        newStr.push(Object.keys(obj[i]));
+        newStr.push(oKobj[i]);
+        newStr.push('\"');
         newStr.push(":");
-        newStr.push(obj[i][Object.keys(obj[i])]);
+        newStr.push('\"');  
+        newStr.push(obj[oKobj[i]]);
         newStr.push('\"');
       } else {
-        newStr.push(stringifyJSON(obj[i]));
+        newStr.push(stringifyJSON(oKobj[i]));
       }
     }
-    newStr.push["}"];
-    newStr2 = ["["];
-    newStr2.push(newStr);
-    newStr2.push("]");
-    return newStr2.join("");
+    newStr.push("}");
+    // newStr2 = ["["];
+    // newStr2.push(newStr);
+    // newStr2.push("]");
+    return newStr.join("");
   }
 
 };
