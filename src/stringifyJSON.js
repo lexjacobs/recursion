@@ -3,8 +3,10 @@
 
 // but you don't so you're going to have to write it from scratch:
 var stringifyJSON = function(obj) {
+  var newStr;
+  var newStr2;
   if (obj !== null && Array.isArray(obj) === false && typeof obj === 'object' && Object.keys(obj).length !== 0) {
-    var newStr = ["{"];
+    newStr = ["{"];
     var oKobj = Object.keys(obj);
 
     for (var i = 0; i < oKobj.length; i++) {
@@ -56,7 +58,7 @@ var stringifyJSON = function(obj) {
     return '' + obj;
   }
   if (Array.isArray(obj) === true && obj.length !== 0) {
-    var newStr = [];
+    newStr = [];
     for (var i = 0; i < obj.length; i++) {
       if (typeof obj[i] === 'number') {
         newStr.push(obj[i]);
@@ -64,17 +66,17 @@ var stringifyJSON = function(obj) {
         newStr.push(stringifyJSON(obj[i]));
       }
     }
-    var newStr2 = ["["];
+    newStr2 = ["["];
     newStr2.push(newStr);
     newStr2.push("]");
     return newStr2.join("");
   }
   if (Array.isArray(obj) === true && obj.length === 0) {
-    var newStr = ["[", "]"];
+    newStr = ["[", "]"];
     return newStr.join("");
   }
   if (typeof obj === 'object' && Object.keys(obj).length === 0) {
-    var newStr = ["{", "}"];
+    newStr = ["{", "}"];
     return newStr.join("");
   }
 };
