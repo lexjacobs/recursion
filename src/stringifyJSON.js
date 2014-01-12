@@ -7,38 +7,38 @@ var stringifyJSON = function(obj) {
   var newStr2;
   if (obj !== null && Array.isArray(obj) === false && typeof obj === 'object' && Object.keys(obj).length !== 0) {
     newStr = ["{"];
-    var oKobj = Object.keys(obj);
+    var ObjectKeysObj = Object.keys(obj);
 
-    for (var i = 0; i < oKobj.length; i++) {
-      if (oKobj[i] === undefined || typeof oKobj[i] === 'function' || obj[oKobj[i]] === undefined || typeof obj[oKobj[i]] === 'function') {
+    for (var i = 0; i < ObjectKeysObj.length; i++) {
+      if (ObjectKeysObj[i] === undefined || typeof ObjectKeysObj[i] === 'function' || obj[ObjectKeysObj[i]] === undefined || typeof obj[ObjectKeysObj[i]] === 'function') {
         continue;
       } else {
         newStr.push('\"');
-        newStr.push(oKobj[i]);
+        newStr.push(ObjectKeysObj[i]);
         newStr.push('\"');
       }
       newStr.push(":");
-      if (Array.isArray(obj[oKobj[i]]) === true) {
-        newStr.push(stringifyJSON(obj[oKobj[i]]));
+      if (Array.isArray(obj[ObjectKeysObj[i]]) === true) {
+        newStr.push(stringifyJSON(obj[ObjectKeysObj[i]]));
       }
-      if (Array.isArray(obj[oKobj[i]]) === false && obj[oKobj[i]] !== null && typeof obj[oKobj[i]] == 'object') {
-        newStr.push(stringifyJSON(obj[oKobj[i]]));
+      if (Array.isArray(obj[ObjectKeysObj[i]]) === false && obj[ObjectKeysObj[i]] !== null && typeof obj[ObjectKeysObj[i]] == 'object') {
+        newStr.push(stringifyJSON(obj[ObjectKeysObj[i]]));
       }
-      if (typeof obj[oKobj[i]] === 'number') {
-        newStr.push(obj[oKobj[i]]);
+      if (typeof obj[ObjectKeysObj[i]] === 'number') {
+        newStr.push(obj[ObjectKeysObj[i]]);
       }
-      if (obj[oKobj[i]] === null) {
+      if (obj[ObjectKeysObj[i]] === null) {
         newStr.push('null');
       }
-      if (typeof obj[oKobj[i]] === 'boolean') {
-        newStr.push(obj[oKobj[i]]);
+      if (typeof obj[ObjectKeysObj[i]] === 'boolean') {
+        newStr.push(obj[ObjectKeysObj[i]]);
       }
-      if (typeof obj[oKobj[i]] === 'string') {
+      if (typeof obj[ObjectKeysObj[i]] === 'string') {
         newStr.push('\"');
-        newStr.push(obj[oKobj[i]]);
+        newStr.push(obj[ObjectKeysObj[i]]);
         newStr.push('\"');
       }
-      if (i < oKobj.length - 1) {
+      if (i < ObjectKeysObj.length - 1) {
         newStr.push(",");
       }
     }
