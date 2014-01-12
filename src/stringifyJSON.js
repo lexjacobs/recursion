@@ -17,7 +17,10 @@ var stringifyJSON = function(obj) {
       }
       newStr.push(":");
       if (Array.isArray(obj[oKobj[i]]) === true) {
-        stringifyJSON(obj[oKobj[i]]);
+        newStr.push(stringifyJSON(obj[oKobj[i]]));
+      }
+      if (Array.isArray(obj[oKobj[i]]) === false && obj[oKobj[i]] !== null && typeof obj[oKobj[i]] == 'object') {
+        newStr.push(stringifyJSON(obj[oKobj[i]]));
       }
       if (typeof obj[oKobj[i]] === 'number') {
         newStr.push(obj[oKobj[i]]);
