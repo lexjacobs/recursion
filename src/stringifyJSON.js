@@ -22,50 +22,56 @@ var stringifyJSON = function(obj) {
       if (typeof obj[oKobj[i]] === 'number') {
         newStr.push(obj[oKobj[i]]);
       }
+      if (obj[oKobj[i]] === null) {
+        newStr.push('null');
+      }
       if (typeof obj[oKobj[i]] === 'boolean') {
         newStr.push(obj[oKobj[i]]);
-      } else {
+      }
+      if (typeof obj[oKobj[i]] === 'string') {
         newStr.push('\"');
         newStr.push(obj[oKobj[i]]);
         newStr.push('\"');
       }
-
-      newStr.push("}");
-      return newStr.join("");
-    }
-  }
-    if (obj === null) {
-      return '' + obj;
-    }
-    if (typeof obj === 'string') {
-      return '\"' + obj + '\"';
-    }
-    if (typeof obj === 'number') {
-      return '' + obj;
-    }
-    if (typeof obj === 'boolean') {
-      return '' + obj;
-    }
-    if (Array.isArray(obj) === true && obj.length !== 0) {
-      var newStr = [];
-      for (var i = 0; i < obj.length; i++) {
-        if (typeof obj[i] === 'number') {
-          newStr.push(obj[i]);
-        } else {
-          newStr.push(stringifyJSON(obj[i]));
-        }
+      if (i < oKobj.length - 1) {
+        newStr.push(",");
       }
-      newStr2 = ["["];
-      newStr2.push(newStr);
-      newStr2.push("]");
-      return newStr2.join("");
     }
-    if (Array.isArray(obj) === true && obj.length === 0) {
-      var newStr = ["[", "]"];
-      return newStr.join("");
+    newStr.push("}");
+    return newStr.join("");
+  }
+  if (obj === null) {
+    return '' + obj;
+  }
+  if (typeof obj === 'string') {
+    return '\"' + obj + '\"';
+  }
+  if (typeof obj === 'number') {
+    return '' + obj;
+  }
+  if (typeof obj === 'boolean') {
+    return '' + obj;
+  }
+  if (Array.isArray(obj) === true && obj.length !== 0) {
+    var newStr = [];
+    for (var i = 0; i < obj.length; i++) {
+      if (typeof obj[i] === 'number') {
+        newStr.push(obj[i]);
+      } else {
+        newStr.push(stringifyJSON(obj[i]));
+      }
     }
-    if (typeof obj === 'object' && Object.keys(obj).length === 0) {
-      var newStr = ["{", "}"];
-      return newStr.join("");
-    }
-  };
+    var newStr2 = ["["];
+    newStr2.push(newStr);
+    newStr2.push("]");
+    return newStr2.join("");
+  }
+  if (Array.isArray(obj) === true && obj.length === 0) {
+    var newStr = ["[", "]"];
+    return newStr.join("");
+  }
+  if (typeof obj === 'object' && Object.keys(obj).length === 0) {
+    var newStr = ["{", "}"];
+    return newStr.join("");
+  }
+};
