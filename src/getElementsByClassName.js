@@ -15,7 +15,7 @@ var getElementsByClassName = function(className) {
       if (node.childNodes[i].classList !== undefined) {
         for (var j = 0; j < node.childNodes[i].classList.length; j++) {
           if (node.childNodes[i].classList[j] === target) {
-            result.push (node.childNodes[i].parentNode ) ;
+            result.push(node.childNodes[i]);
           }
         }
       }
