@@ -11,24 +11,27 @@ var getElementsByClassName = function(className) {
 
   var walkDom = function(node, target) {
     for (var i = 0; i < node.childNodes.length; i++) {
-      if (node.childNodes[i].classList !== undefined) {
+      if (node.childNodes[i] !== undefined && node.childNodes[i].classList !== undefined) {
         for (var j = 0; j < node.childNodes[i].classList.length; j++) {
           if (node.childNodes[i].classList[j] === target) {
             result.push(node.childNodes[i]);
-            if (node.childNodes[i].childNodes.length !== undefined) {
-              return walkDom(node.childNodes[i], target);
-            }
           }
         }
+      }
+      if (node.childNodes[i].childNodes !== undefined) {
+        walkDom(node.childNodes[i], target);
       }
     }
     return result;
   };
-
   return walkDom(document.body, className);
-
-
 };
+
+// the recursion code below needs to be implemented in the right place above
+// or perhaps be refactored completely. something is borken!!!
+
+// if (node.childNodes[i].childNodes !== undefined) {
+//   return walkDom(node.childNodes[i], target);
 
 // the version above is working just fine, but what the function calls
 // isn't recursable for this purpose.
