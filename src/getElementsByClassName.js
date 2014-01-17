@@ -11,14 +11,14 @@ var getElementsByClassName = function(className) {
 
   var walkDom = function(node, target) {
     for (var i = 0; i < node.childNodes.length; i++) {
-      if (node.childNodes[i] !== undefined && node.childNodes[i].classList !== undefined) {
+      if (node.childNodes[i].classList) {
         for (var j = 0; j < node.childNodes[i].classList.length; j++) {
           if (node.childNodes[i].classList[j] === target) {
             result.push(node.childNodes[i]);
           }
         }
       }
-      if (node.childNodes[i].childNodes !== undefined) {
+      if (node.childNodes[i].childNodes) {
         walkDom(node.childNodes[i], target);
       }
     }
@@ -26,55 +26,3 @@ var getElementsByClassName = function(className) {
   };
   return walkDom(document.body, className);
 };
-
-// the recursion code below needs to be implemented in the right place above
-// or perhaps be refactored completely. something is borken!!!
-
-// if (node.childNodes[i].childNodes !== undefined) {
-//   return walkDom(node.childNodes[i], target);
-
-// the version above is working just fine, but what the function calls
-// isn't recursable for this purpose.
-// like the function below, the recursive function works by calling a 
-// function ON a SET of data. below, it's the array of arrays of arrays.
-// above, the SET of data should be the .childNodes of whatever is called in.
-// that way, the .childNodes of the .childNodes can be recursively scanned
-// for the existance of the className.
-
-
-// var testList = [1,2,3,[1,2,[6,7,[11,12,13,14],8],3],4,5];
-// var results = [];
-// var recurser = function(set){
-//   for (var i = 0; i < set.length; i++) {
-//     if (Array.isArray(set[i])){
-//       results.push(set[i]);
-//       return recurser(set[i]);
-//     }
-//   }
-//   return results;
-// };
-// console.log(recurser(testList));
-
-// var getElementsByClassName = function(className) {
-//   var result = [];
-//   for (var i = 0; i < document.body.childNodes.length; i++) {
-//     if (document.body.childNodes[i].classList !== undefined) {
-//       var resultList = document.body.childNodes[i].classList;
-//       for (var j = 0; j < resultList.length; j++) {
-//         if (resultList[j] === className) {
-//           console.log(resultList[j]);
-//           result.push(resultList[j]);
-//           return(result);
-//         }
-//       }
-//     }
-//   }
-// };
-
-// var getElementsByClassName = function(className) {
-//   var result = [];
-//   var $expectedNodes = $(".targetClassName");
-//   result.push($expectedNodes);
-//   // console.log(result);
-//   console.log(_.toArray(result[0]));
-// };
