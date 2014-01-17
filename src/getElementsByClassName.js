@@ -10,12 +10,14 @@ var getElementsByClassName = function(className) {
   var result = [];
 
   var walkDom = function(node, target) {
-
     for (var i = 0; i < node.childNodes.length; i++) {
       if (node.childNodes[i].classList !== undefined) {
         for (var j = 0; j < node.childNodes[i].classList.length; j++) {
           if (node.childNodes[i].classList[j] === target) {
             result.push(node.childNodes[i]);
+            if (node.childNodes[i].childNodes.length !== undefined) {
+              return walkDom(node.childNodes[i], target);
+            }
           }
         }
       }
